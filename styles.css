@@ -1,0 +1,798 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4f5cf1;
+    --secondary-color: #130146;
+    --bg-dark: #0a0e27;
+    --bg-medium: #1a1f3a;
+    --bg-light: #2d3250;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent: #3b82f6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #05081c 0%, #111631 50%, #080b1e 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Video Background */
+.video-background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+    overflow: hidden;
+}
+
+.video-background-container.active {
+    opacity: 1;
+}
+
+.video-background-container video {
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+/* Splash Screen */
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(28, 47, 134, 0.9), rgb(8, 14, 45));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.splash-content {
+    text-align: center;
+}
+
+.splash-icon {
+    font-size: 5rem;
+    color: white;
+    margin-bottom: 1rem;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 75% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.splash-content h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.splash-content p {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+/* Page System */
+.page {
+    display: none;
+    position: relative;
+    z-index: 2;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(26, 31, 58, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 0;
+}
+
+.nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1.5rem;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: var(--text-primary);
+    background: rgba(11, 31, 211, 0.4);
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 80px;
+    padding: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(77, 68, 255, 0.3), rgba(0, 54, 141, 0.3));
+    border-radius: 1.5rem;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.hero-play-btn {
+    background: linear-gradient(135deg, #0c056d, var(--accent));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(42, 40, 179, 0.4);
+}
+
+.hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12rem;
+    color: var(--primary-color);
+    opacity: 0.2;
+}
+
+.spinning {
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Section */
+.section {
+    margin-bottom: 3rem;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.song-card {
+    background: rgba(45, 50, 80, 0.5);
+    border-radius: 1rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.song-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    border-color: var(--primary-color);
+}
+
+.song-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 0.75rem;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #667eea 0%, #121f74 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.song-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.song-card-img i {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.song-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.song-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Player Page */
+.back-btn {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(3, 7, 79, 0.2);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+    background: var(--primary-color);
+    transform: translateX(-5px);
+}
+
+.player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.player-box {
+    background: rgba(26, 31, 58, 0.20);
+    border-radius: 2rem;
+    padding: 1.2rem;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+}
+
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.album-art {
+    width: 90px;
+    height: 90px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.track-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.track-info p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Lyrics Container */
+.lyrics-container {
+    width: 100%;
+    max-width: 100%;
+    height: 160px;
+    overflow-y: auto;
+    background: rgba(10, 14, 39, 0.14);
+    backdrop-filter: blur(24px);
+    padding: 0.85rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.lyrics-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lyrics-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.lyrics-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.lyrics-placeholder {
+    color: var(--text-secondary);
+    text-align: center;
+    font-style: italic;
+}
+
+.lyric-line {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.lyric-line.highlight {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px rgba(18, 23, 168, 0.8);
+}
+
+/* Player Controls */
+.player-controls {
+    margin-top: auto;
+}
+
+.progress-section {
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    height: 8px;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #020350, var(--accent));
+    width: 0%;
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.1s linear;
+}
+
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.main-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.play-pause-btn {
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #232a94, var(--accent));
+    font-size: 1.5rem;
+}
+
+.play-pause-btn:hover {
+    background: linear-gradient(135deg, var(--accent), #0d0d56);
+    transform: scale(1.1);
+}
+
+.secondary-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.control-btn.small {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+}
+
+.control-btn.active-feature {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.volume-control,
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volume-control i,
+.speed-control i {
+    color: var(--primary-color);
+    font-size: 0.85rem;
+}
+
+.slider {
+    width: 60px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#speedDisplay {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    min-width: 35px;
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 1.5rem;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 2.5rem;
+    }
+
+    .hero-image {
+        font-size: 10rem;
+        opacity: 0.18;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .player-box {
+        max-width: 360px;
+        padding: 1.1rem;
+        background: rgba(26, 31, 58, 0.18);
+        border-radius: 1.8rem;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        padding: 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+
+    .hero-image {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+
+    .song-card {
+        padding: 0.85rem;
+    }
+
+    .player-container {
+        padding: 1.5rem 1rem 2rem;
+        min-height: auto;
+    }
+
+    .player-header {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .album-art {
+        width: 80px;
+        height: 80px;
+    }
+
+    .track-info h2 {
+        font-size: 1.2rem;
+    }
+
+    .track-info p {
+        font-size: 0.95rem;
+    }
+
+    .player-box {
+        max-width: 320px;
+        padding: 1rem;
+        background: rgba(26, 31, 58, 0.16);
+        border-radius: 1.6rem;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .lyrics-container {
+        height: 150px;
+        background: rgba(10, 14, 39, 0.16);
+    }
+
+    .secondary-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .volume-control,
+    .speed-control {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 0.8rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .nav a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .hero {
+        padding: 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero-play-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1rem;
+    }
+
+    .player-box {
+        max-width: 300px;
+        padding: 0.75rem;
+        border-radius: 1.4rem;
+        background: rgba(26, 31, 58, 0.14);
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .back-btn {
+        top: 0.8rem;
+        left: 0.8rem;
+        padding: 0.65rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .secondary-controls {
+        gap: 0.75rem;
+    }
+
+    .volume-control,
+    .speed-control {
+        gap: 0.35rem;
+    }
+
+    .slider {
+        width: 100%;
+    }
+
+    .lyrics-container {
+        height: 120px;
+        background: rgba(10, 14, 39, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+}
+
+@media (max-width: 1024px) {
+    .lyrics-container {
+        height: 140px;
+        background: rgba(10, 14, 39, 0.16);
+    }
+}
