@@ -612,14 +612,6 @@
     videoBackground = document.getElementById('videoBackground');
     backgroundVideo = document.getElementById('backgroundVideo');
 
-    if (backgroundVideo) {
-      backgroundVideo.preload = 'metadata';
-      backgroundVideo.muted = true;
-      backgroundVideo.loop = true;
-      backgroundVideo.playsInline = true;
-      backgroundVideo.setAttribute('webkit-playsinline', '');
-    }
-
     audioPlayer = document.getElementById('audioPlayer');
     albumArt = document.getElementById('albumArt');
     trackTitle = document.getElementById('trackTitle');
