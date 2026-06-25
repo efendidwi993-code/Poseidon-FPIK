@@ -19,8 +19,8 @@
     artist: "Poseidon",
     album: "Album 1",
     albumArtUrl: "Image/Poseidon.png",
-    audioSrc: "audio/salam.mp3",
-    videoBgSrc: "/videos/salam.mp4",
+    audioSrc: "audio/Salam.mp3",
+    videoBgSrc: "/videos/Salam.mp4",
     lyrics: [
         { time: 5, text: "Salam assalamualaikum" },
         { time: 12, text: "Salam assalamualaikum" },
@@ -61,8 +61,8 @@
     artist: "Poseidon",
     album: "Album 1",
     albumArtUrl: "Image/Poseidon.png",
-    audioSrc: "audio/Goyang Gemes (Hari ini).mp3",
-    videoBgSrc: "/videos/Goyang Gemes (Hari ini).mp4",
+    audioSrc: "audio/Goyang Gemes (Hari Ini).mp3",
+    videoBgSrc: "/videos/Goyang Gemes (Hari Ini).mp4",
     lyrics: [
         { time: 0, text: "Hari ini" },
         { time: 4, text: "kita bahagia! (bahagia)" },
@@ -346,8 +346,8 @@
   artist: "Poseidon",
   album: "Album 3",
   albumArtUrl: "Image/Poseidon.png",
-  audioSrc: "audio/Begini Jadi .mp3",
-  videoBgSrc: "/videos/Begini Jadi .mp4",
+  audioSrc: "audio/Begini jadi .mp3",
+  videoBgSrc: "/videos/Begini jadi .mp4",
   lyrics: [
     { time: 0.0, text: "Begini jadi anak Poseidon" },
     { time: 9.0, text: "Dimana mana (jadi apa?) ..." },
@@ -612,6 +612,14 @@
     videoBackground = document.getElementById('videoBackground');
     backgroundVideo = document.getElementById('backgroundVideo');
 
+    if (backgroundVideo) {
+      backgroundVideo.preload = 'metadata';
+      backgroundVideo.muted = true;
+      backgroundVideo.loop = true;
+      backgroundVideo.playsInline = true;
+      backgroundVideo.setAttribute('webkit-playsinline', '');
+    }
+
     audioPlayer = document.getElementById('audioPlayer');
     albumArt = document.getElementById('albumArt');
     trackTitle = document.getElementById('trackTitle');
@@ -796,9 +804,20 @@
     const isPlayerPageActive = playerPage && playerPage.classList.contains('active');
 
     if (isPlayerPageActive && song && song.videoBgSrc && backgroundVideo && videoBackground) {
-      backgroundVideo.src = song.videoBgSrc;
-      backgroundVideo.load();
-      videoBackground.classList.add('active');
+      const requestedSrc = song.videoBgSrc;
+      if (!backgroundVideo.src.includes(requestedSrc)) {
+        backgroundVideo.src = requestedSrc;
+        backgroundVideo.load();
+      }
+      videoBackground.classList.remove('active');
+      backgroundVideo.oncanplaythrough = () => {
+        if (backgroundVideo.src.includes(requestedSrc)) {
+          videoBackground.classList.add('active');
+          if (isPlaying) {
+            backgroundVideo.play().catch(() => {});
+          }
+        }
+      };
       return;
     }
 
@@ -806,7 +825,8 @@
       videoBackground.classList.remove('active');
       if (backgroundVideo) {
         backgroundVideo.pause();
-        backgroundVideo.src = '';
+        backgroundVideo.removeAttribute('src');
+        backgroundVideo.load();
       }
     }
   }
