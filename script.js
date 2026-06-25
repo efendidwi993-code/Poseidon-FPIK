@@ -135,7 +135,7 @@
   title: "Perikanan Kelautan",
   artist: "Poseidon",
   album: "Album 1",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Perikanan Kelautan .mp3",
   videoBgSrc: "/videos/Perikanan Kelautan .mp4",
   lyrics: [
@@ -154,7 +154,7 @@
   title: "Di Laut Kita Jaya Di Darat Kita Juara",
   artist: "Poseidon",
   album: "Album 1",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Di Laut Kita Jaya Di Darat Kita Juara.mp3",
   videoBgSrc: "/videos/Di Laut Kita Jaya Di Darat Kita Juara.mp4",
   lyrics: [
@@ -173,7 +173,7 @@
   title: "Tatap Mata",
   artist: "Poseidon",
   album: "Album 1",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Tatap Mata .mp3",
   videoBgSrc: "/videos/Tatap Mata .mp4",
   lyrics: [
@@ -193,7 +193,7 @@
   title: "Neng, Bang Yok Kita Supporteran",
   artist: "Poseidon",
   album: "Album 1",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Neng, Bang Yok Kita Supporteran.mp3",
   videoBgSrc: "/videos/Neng, Bang Yok Kita Supporteran.mp4",
   lyrics: [
@@ -217,7 +217,7 @@
   title: "Sayiddan",
   artist: "Poseidon",
   album: "Album 1",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Sayiddan.mp3",
   videoBgSrc: "/videos/Sayiddan.mp4",
   lyrics: [
@@ -262,7 +262,7 @@
   title: "Tul jaenajaenatul bapa Begin",
   artist: "Poseidon",
   album: "Album 1",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Tul jaenajaenatul bapa Begin.mp3",
   videoBgSrc: "/videos/Tul jaenajaenatul bapa Begin.mp4",
   lyrics: [
@@ -307,7 +307,7 @@
   title: "Poseidon sosis so nice",
   artist: "Poseidon",
   album: "Album 2",
-  albumArtUrl: "image/Poseidon.png",
+  albumArtUrl: "Image/Poseidon.png",
   audioSrc: "audio/Poseidon sosis so nice.mp3",
   videoBgSrc: "/videos/Poseidon sosis so nice.mp4",
   lyrics: [
