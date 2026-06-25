@@ -796,20 +796,9 @@
     const isPlayerPageActive = playerPage && playerPage.classList.contains('active');
 
     if (isPlayerPageActive && song && song.videoBgSrc && backgroundVideo && videoBackground) {
-      const requestedSrc = song.videoBgSrc;
-      if (!backgroundVideo.src.includes(requestedSrc)) {
-        backgroundVideo.src = requestedSrc;
-        backgroundVideo.load();
-      }
-      videoBackground.classList.remove('active');
-      backgroundVideo.oncanplaythrough = () => {
-        if (backgroundVideo.src.includes(requestedSrc)) {
-          videoBackground.classList.add('active');
-          if (isPlaying) {
-            backgroundVideo.play().catch(() => {});
-          }
-        }
-      };
+      backgroundVideo.src = song.videoBgSrc;
+      backgroundVideo.load();
+      videoBackground.classList.add('active');
       return;
     }
 
@@ -817,8 +806,7 @@
       videoBackground.classList.remove('active');
       if (backgroundVideo) {
         backgroundVideo.pause();
-        backgroundVideo.removeAttribute('src');
-        backgroundVideo.load();
+        backgroundVideo.src = '';
       }
     }
   }
